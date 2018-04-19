@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="org.zerock.mapper.SurveyMapper">
+	
+		<select id="selectAllSurvey" resultType="org.zerock.domain.SurveyVO">
+			select sv_id, sv_title, sv_writer, to_char(sv_startdate, 'yyyy.MM.dd') sv_startdate, to_char(sv_enddate, 'yyyy.MM.dd') sv_enddate, sv_hits, sv_count, sv_state from survey order by sv_id desc
+		</select>
+		
+		<insert id="insertSurvey">
+			insert into survey (sv_id, sv_title, sv_writer, sv_startdate, sv_enddate, sv_hits, sv_count, sv_state)
+			values( #{sv_id}, #{sv_title}, #{sv_writer}, #{sv_startdate}, #{sv_enddate}, #{sv_hits}, #{sv_count}, #{sv_state} )
+		</insert>
+		
+		<insert id="insertResult" parameterType="map">
+			insert into survey_result (result_id,m_id,list_id,RESULT_DATE) values(suvresult_seq.nextval, #{m_id}, #{list_id}, to_date(SYSDATE,'YYYY-MM-DD'))
+		</insert>
+		
+		<update id="updateChunum">
+			update survey_list set list_chnum = #{list_id}
+		</update>
+		
+		<delete id="deleteSurvey">
+			delete from survey where sv_id = #{sv_id}
+		</delete>
+		
+		<update id="updateSurvey">
+			update survey set sv_id=#{sv_id}, sv_title=#{sv_title}, sv_writer=#{sv_writer}, sv_startdate=#{sv_startdate}, sv_enddate= #{sv_enddate}, sv_hits=#{sv_hits}, sv_count=#{sv_count}, sv_state=#{sv_state}    
+		</update>
+		
+		<select id="selectMySurvey" resultType="org.zerock.domain.SurveyVO">
+			select sv_id, sv_title, sv_writer, to_char(sv_startdate, 'yyyy.MM.dd') sv_startdate, to_char(sv_enddate, 'yyyy.MM.dd') sv_enddate, sv_hits, sv_count, sv_state 
+			from SURVEY where sv_id in (select DISTINCT s.sv_id from member m join SURVEY_RESULT r on r.M_ID = m.M_ID join SURVEY_LIST l on r.LIST_ID = l.LIST_ID join SURVEY s on s.SV_ID=l.SV_ID where m.M_ID = #{m_id} )
+		</select>
+		
+		<select id="selectSurvey" resultType="org.zerock.domain.SurveyVO">
+			select list_id,sv_id,LIST_CONTENT from survey_list where sv_id = #{sv_id}
+		</select>
+		
+		<select id="selectTitle"  resultType="string">
+			select sv_title from survey where sv_id = #{sv_id}
+		</select>
+		
+		
+	</mapper>
