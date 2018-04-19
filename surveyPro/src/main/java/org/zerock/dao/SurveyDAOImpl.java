@@ -67,5 +67,10 @@ public class SurveyDAOImpl implements SurveyDAO {
 		
 	}
 
+	@Override
+	public List<SurveyVO> selectSurveyChoices(int sv_id) {
+		return sqlSession.selectList(namespace+".selectSurveyChoices", sv_id);
+	}
+
 
 }

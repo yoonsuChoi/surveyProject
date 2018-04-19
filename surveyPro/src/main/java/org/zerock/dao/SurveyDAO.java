@@ -19,4 +19,7 @@ public interface SurveyDAO {
 	public List<SurveyVO> insertResult(String m_id, int list_id);
 	public void updateChunum(int list_id);
 	
+	public List<SurveyVO> selectSurveyChoices(int sv_id);
+	
+	
 }

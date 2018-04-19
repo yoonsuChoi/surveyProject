@@ -40,5 +40,11 @@
 			select sv_title from survey where sv_id = #{sv_id}
 		</select>
 		
+		<select id="selectSurveyChoices" resultType="org.zerock.domain.SurveyVO">
+			select survey_list.LIST_CONTENT,round((survey_list.list_chnum/survey.sv_count)*100,1) as percent
+			from survey join survey_list on survey.sv_id = survey_list.sv_id
+			where survey_list.sv_id = #{sv_id}
+			order by survey_list.list_id asc
+		</select>
 		
 	</mapper>

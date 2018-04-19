@@ -60,4 +60,9 @@ public class SurveyServiceImpl implements SurveyService {
 		
 	}
 
+	@Override
+	public List<SurveyVO> selectSurveyChoices(int sv_id) throws Exception {
+		return dao.selectSurveyChoices(sv_id);
+	}
+
 }
