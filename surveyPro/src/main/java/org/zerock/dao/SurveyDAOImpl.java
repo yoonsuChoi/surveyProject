@@ -67,5 +67,14 @@ public class SurveyDAOImpl implements SurveyDAO {
 		
 	}
 
+	@Override
+	public List<SurveyVO> resultCheck(String m_id, int sv_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("m_id", m_id);
+		map.put("sv_id",sv_id);
+		
+		return sqlSession.selectList(namespace+".resultCheck",map);
+	}
+
 
 }

@@ -60,4 +60,10 @@ public class SurveyServiceImpl implements SurveyService {
 		
 	}
 
+	@Override
+	public List<SurveyVO> resultCheck(String m_id, int sv_id) {
+		return dao.resultCheck(m_id,sv_id);
+		
+	}
+
 }

@@ -6,17 +6,21 @@
 			select sv_id, sv_title, sv_writer, to_char(sv_startdate, 'yyyy.MM.dd') sv_startdate, to_char(sv_enddate, 'yyyy.MM.dd') sv_enddate, sv_hits, sv_count, sv_state from survey order by sv_id desc
 		</select>
 		
+		<select id="resultCheck" resultType = "map">
+			select m_id,A.list_id, result_id from survey_result A left outer join (select list_id, sv_id, list_content from survey_list) B on A.list_id = B.list_id left outer join (select sv_id from survey) C on C.sv_id = B.sv_id where m_id=#{m_id}  and B.sv_id=#{sv_id}
+		</select>
+		
 		<insert id="insertSurvey">
 			insert into survey (sv_id, sv_title, sv_writer, sv_startdate, sv_enddate, sv_hits, sv_count, sv_state)
 			values( #{sv_id}, #{sv_title}, #{sv_writer}, #{sv_startdate}, #{sv_enddate}, #{sv_hits}, #{sv_count}, #{sv_state} )
 		</insert>
 		
 		<insert id="insertResult" parameterType="map">
-			insert into survey_result (result_id,m_id,list_id,RESULT_DATE) values(suvresult_seq.nextval, #{m_id}, #{list_id}, to_date(SYSDATE,'YYYY-MM-DD'))
+			insert into survey_result (result_id,m_id,list_id,RESULT_DATE) values(SUVRESULT_SEQ.nextval, #{m_id}, #{list_id}, to_date(SYSDATE,'YYYY-MM-DD'))
 		</insert>
 		
 		<update id="updateChunum">
-			update survey_list set list_chnum = #{list_id}
+			update survey_list set list_chnum = list_chnum+1 where list_id = #{list_id}
 		</update>
 		
 		<delete id="deleteSurvey">
