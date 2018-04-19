@@ -75,6 +75,9 @@ public class SurveyDAOImpl implements SurveyDAO {
 		
 		return sqlSession.selectList(namespace+".resultCheck",map);
 	}
+	public List<SurveyVO> selectSurveyChoices(int sv_id) {
+		return sqlSession.selectList(namespace+".selectSurveyChoices", sv_id);
+	}
 
 
 }

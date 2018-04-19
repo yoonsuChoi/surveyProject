@@ -65,5 +65,8 @@ public class SurveyServiceImpl implements SurveyService {
 		return dao.resultCheck(m_id,sv_id);
 		
 	}
+	public List<SurveyVO> selectSurveyChoices(int sv_id) throws Exception {
+		return dao.selectSurveyChoices(sv_id);
+	}
 
 }

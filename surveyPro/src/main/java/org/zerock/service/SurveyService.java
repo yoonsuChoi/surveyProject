@@ -16,4 +16,5 @@ public interface SurveyService {
 	public List<SurveyVO> insertResult(String m_id, int list_id) throws Exception;
 	public void updateChunum(int list_id) throws Exception;
 	public List<SurveyVO> resultCheck(String m_id, int sv_id);
+	public List<SurveyVO> selectSurveyChoices(int sv_id) throws Exception;
 }

@@ -12,7 +12,8 @@ public class SurveyVO {
 	private String sv_state;
 	private String list_content;
 	private String list_id;
-	
+	private int list_chnum;
+	private int percent;
 	
 	
 	public String getList_content() {
@@ -76,5 +77,17 @@ public class SurveyVO {
 	public void setSv_state(String sv_state) {
 		this.sv_state = sv_state;
 	}
-	
+	public int getList_chnum() {
+		return list_chnum;
+	}
+	public void setList_chnum(int list_chnum) {
+		this.list_chnum = list_chnum;
+	}
+	public int getPercent() {
+		return percent;
+	}
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
+
 }
